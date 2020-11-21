@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tanya apa?</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"></link>
+    <link rel="stylesheet" href="./style.css"></link>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.1.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.1.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.1.1/firebase-firestore.js"></script>
+  </head>
+  <body>
+    <div class="nav">
+        <h1 class="brand">Question App</h1>
+        <div id="rightNav" class="right-nav">
+            <h2 id="userName" class="user-name"></h2>
+        </div>
+    </div>
+
+    <div class="container main">
+        <div class="columns">
+            <form id="form" class="column is-one-quarter is-full-mobile">
+                <div>
+                    <label class="label">Tanya apa?</label>
+                    <div class="control">
+                        <textarea class="textarea" name="question" placeholder="pertanyaan..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="button is-success is-full">Tanya</button>
+            </form>
+            <div id="questions" class="column is-three-quarters is-full-mobile"></div>
+        </div>
+    </div>
+  </body>
+</html>
