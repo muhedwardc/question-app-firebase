@@ -1,4 +1,5 @@
 const questionsContainer = document.getElementById('questions');
+const form = document.getElementById('form')
 
 // create question card
 function createQuestionElement(question) {
@@ -24,8 +25,6 @@ function createQuestionElement(question) {
     const questionElement = document.createElement('div');
     questionElement.setAttribute('class', 'box');
     questionElement.innerHTML = questionHTML;
-    questionElement.querySelector('.button-delete').addEventListener('click', () => { deleteKost(question.id) });
-    questionElement.querySelector('.button-vote').addEventListener('click', () => { addVote(question.id) });
     
     return questionElement;
 }
@@ -34,8 +33,8 @@ function createQuestionElement(question) {
 function renderQuestions(questions) {
     questionsContainer.innerHTML = '';
 
-    questions.forEach(kost => {
-        const questionElement = createQuestionElement(kost);
+    questions.forEach(question => {
+        const questionElement = createQuestionElement(question);
         questionsContainer.appendChild(questionElement);
     })
 }
