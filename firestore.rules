@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	function isAuth() {
+    	return request.auth != null;
+    }
+    
+    function isSender() {
+    	return request.auth.uid == resource.data.senderId;
+    }
+    
+    function isUpdateVote() {
+    	return 'vote' in request.resource.data && request.resource.data.vote != resource.data.vote;
+    }
+    
+    function isAlreadyVote() {
+    	return request.auth.uid in resource.data.voters;
+    }
+    
+    match /questions/{questionId} {
+      allow read;
+      allow create: if isAuth();
+      allow delete: if isAuth() && isSender();
+      allow update: if isAuth() && ((!isUpdateVote() && isSender()) || (isUpdateVote() && !isAlreadyVote()));
+    }
+  }
+}

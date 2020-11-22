@@ -1,12 +1,34 @@
 const rightNav = document.getElementById('rightNav');
 const userName = document.getElementById('userName');
 
+firebase.auth().onAuthStateChanged(user => {
+    const rightNavButton = rightNav.querySelector('button');
+    if (rightNavButton) {
+        rightNav.removeChild(rightNavButton);
+    }
+
+    if (user) {
+        createAuthButton('logout');
+        userName.hidden = false;
+        userName.innerText = `Hello, ${user.displayName}`
+    } else {
+        createAuthButton('login');
+        userName.hidden = true;
+        userName.innerText = ''
+    }
+})
+
+function currentUser() {
+    return firebase.auth().currentUser;
+}
+
 function login() {
-    // login with google
+    const googleAuthProvider = new firebase.auth.GoogleAuthProvider;
+    firebase.auth().signInWithPopup(googleAuthProvider);
 }
 
 function logout() {
-    // logout
+    firebase.auth().signOut();
 }
 
 function createAuthButton(type) {
